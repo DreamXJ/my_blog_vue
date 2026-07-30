@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <!-- 背景 -->
+  <rect width="32" height="32" rx="6" fill="#0F1218"/>
+  <!-- 六边形轮廓 -->
+  <path d="M16 3L26 9V23L16 29L6 23V9L16 3Z" stroke="url(#g)" stroke-width="1" opacity="0.4"/>
+  <!-- 菱形核心 -->
+  <path d="M16 8L22 16L16 24L10 16L16 8Z" fill="url(#g)" opacity="0.3"/>
+  <path d="M16 11L19 16L16 21L13 16L16 11Z" fill="url(#g)" opacity="0.5"/>
+  <!-- D 字母 -->
+  <text x="16" y="20.5" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-weight="700" font-size="11" fill="url(#g)" letter-spacing="-0.5">D</text>
+  <!-- 光点 -->
+  <circle cx="9" cy="7" r="1" fill="#3B82F6" opacity="0.5"/>
+  <circle cx="23" cy="7" r="0.8" fill="#8B5CF6" opacity="0.4"/>
+  <circle cx="16" cy="25" r="0.7" fill="#06B6D4" opacity="0.4"/>
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#3B82F6"/>
+      <stop offset="50%" stop-color="#8B5CF6"/>
+      <stop offset="100%" stop-color="#06B6D4"/>
+    </linearGradient>
+  </defs>
+</svg>
