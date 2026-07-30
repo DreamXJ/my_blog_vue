@@ -17,18 +17,18 @@
 
 ## 🛠️ 技术栈
 
-| 技术 | 用途 |
-|------|------|
-| [Vue 3](https://vuejs.org/) | 前端框架（Composition API） |
-| [Vite](https://vitejs.dev/) | 构建工具 |
-| [Tailwind CSS](https://tailwindcss.com/) | 实用优先的 CSS 框架 |
-| [Pinia](https://pinia.vuejs.org/) | 状态管理 |
-| [Vue Router](https://router.vuejs.org/) | 路由管理 |
-| [gray-matter](https://github.com/jonschlinkert/gray-matter) | Markdown Frontmatter 解析 |
-| [marked](https://marked.js.org/) | Markdown → HTML 渲染 |
-| [highlight.js](https://highlightjs.org/) | 代码语法高亮 |
-| [Mermaid](https://mermaid.js.org/) | 流程图 / 时序图渲染 |
-| [gh-pages](https://github.com/tschaub/gh-pages) | GitHub Pages 部署 |
+| 技术                                                        | 用途                        |
+| ----------------------------------------------------------- | --------------------------- |
+| [Vue 3](https://vuejs.org/)                                 | 前端框架（Composition API） |
+| [Vite](https://vitejs.dev/)                                 | 构建工具                    |
+| [Tailwind CSS](https://tailwindcss.com/)                    | 实用优先的 CSS 框架         |
+| [Pinia](https://pinia.vuejs.org/)                           | 状态管理                    |
+| [Vue Router](https://router.vuejs.org/)                     | 路由管理                    |
+| [gray-matter](https://github.com/jonschlinkert/gray-matter) | Markdown Frontmatter 解析   |
+| [marked](https://marked.js.org/)                            | Markdown → HTML 渲染        |
+| [highlight.js](https://highlightjs.org/)                    | 代码语法高亮                |
+| [Mermaid](https://mermaid.js.org/)                          | 流程图 / 时序图渲染         |
+| [gh-pages](https://github.com/tschaub/gh-pages)             | GitHub Pages 部署           |
 
 ## 📁 项目结构
 
@@ -110,15 +110,15 @@ cover: "/images/cover.png"
 
 **字段说明：**
 
-| 字段 | 必填 | 说明 |
-|------|------|------|
-| `title` | ✅ | 文章标题 |
-| `date` | ✅ | 发布日期（YYYY-MM-DD） |
-| `tags` | ✅ | 标签数组，用于筛选 |
-| `desc` | ❌ | 文章摘要，显示在卡片上（也支持 `description`） |
-| `category` | ❌ | 分类 |
-| `readTime` | ❌ | 阅读时长（分钟），不填自动估算 |
-| `cover` | ❌ | 封面图片路径，放在 `public/images/` 下 |
+| 字段       | 必填 | 说明                                           |
+| ---------- | ---- | ---------------------------------------------- |
+| `title`    | ✅   | 文章标题                                       |
+| `date`     | ✅   | 发布日期（YYYY-MM-DD）                         |
+| `tags`     | ✅   | 标签数组，用于筛选                             |
+| `desc`     | ❌   | 文章摘要，显示在卡片上（也支持 `description`） |
+| `category` | ❌   | 分类                                           |
+| `readTime` | ❌   | 阅读时长（分钟），不填自动估算                 |
+| `cover`    | ❌   | 封面图片路径，放在 `public/images/` 下         |
 
 ### 构建
 
@@ -127,6 +127,7 @@ npm run build
 ```
 
 构建产物在 `dist/` 目录，同时自动生成：
+
 - `blog-data.json` — 文章数据
 - `search-index.json` — 搜索索引
 - `sitemap.xml` — 站点地图
@@ -144,14 +145,16 @@ npm run preview
 1. 在 GitHub 创建仓库（如 `myblog2`）
 
 2. 修改 `vite.config.js` 中的 `base` 字段为你的仓库名：
+
    ```js
    base: '/myblog2/',  // ← 改为你的仓库名
    ```
 
 3. 构建并部署：
+
    ```bash
    npm run build
-   npm run deploy
+   npm run deploy "更新静态资源"
    ```
 
 4. 进入仓库 **Settings → Pages**，将 Source 设置为 `gh-pages` 分支，根目录 `/ (root)`
@@ -171,8 +174,8 @@ npm run deploy
 
 博客内置 5 套专业配色主题，每套都支持深色/亮色双模式：
 
-| 主题 | 暗色基底 | 主色 | 气质 |
-|------|---------|------|------|
+| 主题        | 暗色基底  | 主色      | 气质        |
+| ----------- | --------- | --------- | ----------- |
 | 🥇 北欧极光 | `#0F1218` | `#3B82F6` | 冷静 · 专业 |
 | 🌸 暮色樱花 | `#1A1118` | `#F472B6` | 柔和 · 浪漫 |
 | 🌿 森林冠层 | `#0C1412` | `#34D399` | 自然 · 沉静 |
