@@ -10,7 +10,7 @@ const projects = [
     name: "MyBlog",
     desc: "下一代个人博客系统 — 基于 Vue3 + Vite + Tailwind CSS 构建，Markdown 驱动，支持全站搜索与标签归档。",
     tags: ["Vue3", "Vite", "Tailwind CSS"],
-    url: "https://dreamxj.github.io/myblog/",
+    url: "https://dreamxj.github.io/my_blog_vue/#/",
     status: "已完成",
     gradient: "from-[#3B82F6] to-[#8B5CF6]",
   },
