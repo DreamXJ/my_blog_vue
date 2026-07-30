@@ -12,7 +12,7 @@ marked.setOptions({
   gfm: true,
   highlight: function (code, lang) {
     if (lang && hljs.getLanguage(lang)) {
-      try { return hljs.highlight(code, { language: lang }).value } catch (_) {}
+      try { return hljs.highlight(code, { language: lang }).value } catch (_) { }
     }
     return hljs.highlightAuto(code).value
   }
@@ -52,7 +52,7 @@ function blogPlugin() {
           if (typeof data.date === 'string') dateStr = data.date.slice(0, 10)
           else if (data.date instanceof Date && !isNaN(data.date)) {
             const d = data.date
-            dateStr = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`
+            dateStr = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`
           }
         }
         if (!dateStr) dateStr = new Date().toISOString().slice(0, 10)
@@ -69,11 +69,11 @@ function blogPlugin() {
       for (const a of articles) for (const t of a.tags) { if (!tagMap[t]) tagMap[t] = []; tagMap[t].push(a.slug) }
       const archiveMap = {}
       for (const a of articles) {
-        const key = `${a.date.slice(0,4)}-${a.date.slice(5,7)}`
-        if (!archiveMap[key]) archiveMap[key] = { year: a.date.slice(0,4), month: a.date.slice(5,7), label: `${a.date.slice(0,4)}年${a.date.slice(5,7)}月`, articles: [] }
+        const key = `${a.date.slice(0, 4)}-${a.date.slice(5, 7)}`
+        if (!archiveMap[key]) archiveMap[key] = { year: a.date.slice(0, 4), month: a.date.slice(5, 7), label: `${a.date.slice(0, 4)}年${a.date.slice(5, 7)}月`, articles: [] }
         archiveMap[key].articles.push(a.slug)
       }
-      const archives = Object.values(archiveMap).sort((a, b) => a.year !== b.year ? Number(b.year)-Number(a.year) : Number(b.month)-Number(a.month))
+      const archives = Object.values(archiveMap).sort((a, b) => a.year !== b.year ? Number(b.year) - Number(a.year) : Number(b.month) - Number(a.month))
       const blogData = { articles, tags: tagMap, archives }
 
       const searchIndex = articles.map(a => ({ slug: a.slug, title: a.title, desc: a.desc, tags: a.tags, date: a.date }))
@@ -106,7 +106,7 @@ function blogPlugin() {
 }
 
 export default defineConfig({
-  base: '/myblog2/',
+  base: '/my_blog_vue/',
   plugins: [vue(), blogPlugin()],
   resolve: { alias: { '@': fileURLToPath(new URL('./src', import.meta.url)) } },
   build: { outDir: 'dist', assetsDir: 'assets' }
