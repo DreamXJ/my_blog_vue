@@ -22,7 +22,10 @@ console.log('🚀  部署到 GitHub Pages...')
 console.log('')
 
 const dateStr = new Date().toISOString().slice(0, 10)
-const COMMIT_MSG = `deploy: 更新静态资源 ${dateStr}`
+const customMsg = process.argv[2]
+const COMMIT_MSG = customMsg ? `deploy: ${customMsg}` : `deploy: 更新静态资源 ${dateStr}`
+
+console.log(`📝  提交信息: ${COMMIT_MSG}`)
 
 try {
   execSync(`npx gh-pages -d dist -b main --repo ${GIT_REPO} --dotfiles -m "${COMMIT_MSG}"`, {
