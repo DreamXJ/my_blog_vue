@@ -1,9 +1,8 @@
 <script setup>
-import { ref, computed, onMounted, nextTick, watch } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
+import { ref, onMounted, nextTick, watch } from 'vue'
+import { useRoute, useRouter, onBeforeRouteLeave } from 'vue-router'
 import { useBlogStore } from '@/store/blog'
 import ArticleCard from '@/components/ArticleCard.vue'
-import { onBeforeRouteLeave } from 'vue-router'
 
 const route = useRoute()
 const router = useRouter()

@@ -234,11 +234,6 @@ body {
   background-size: 56px 56px;
 }
 
-.bg-grid-dot {
-  background-image: radial-gradient(rgba(59, 130, 246, 0.06) 1px, transparent 1px);
-  background-size: 24px 24px;
-}
-
 /* ── 柔光渐变背景 ────────────────────────── */
 .bg-glow {
   position: fixed;
@@ -258,21 +253,6 @@ body {
   -webkit-backdrop-filter: blur(16px) saturate(1.1);
   border: 1px solid var(--border-subtle);
   transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.glass-border::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  padding: 1px;
-  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary), transparent 60%);
-  -webkit-mask:
-    linear-gradient(#fff 0 0) content-box,
-    linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  pointer-events: none;
 }
 
 .glass-card {
@@ -457,29 +437,6 @@ body {
   background: rgba(59, 130, 246, 0.1);
   border-color: rgba(59, 130, 246, 0.2);
   color: #60A5FA;
-}
-
-/* ── 输入框 ──────────────────────────────── */
-.input-glass {
-  width: 100%;
-  padding: 0.625rem 1rem;
-  background: rgba(25, 32, 50, 0.45);
-  border: 1px solid rgba(59, 130, 246, 0.08);
-  border-radius: 12px;
-  color: #D1D5DB;
-  font-size: 0.875rem;
-  outline: none;
-  transition: all 0.3s ease;
-  backdrop-filter: blur(8px);
-}
-
-.input-glass::placeholder {
-  color: rgba(156, 163, 175, 0.5);
-}
-
-.input-glass:focus {
-  border-color: rgba(59, 130, 246, 0.3);
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.06), 0 0 20px rgba(59, 130, 246, 0.03);
 }
 
 /* ── Markdown 文章渲染 ──────────────────── */
@@ -835,17 +792,6 @@ body {
 .light .btn-ghost { color: #6B7280; }
 .light .btn-ghost:hover { color: #111827; background: rgba(0, 0, 0, 0.03); }
 
-/* 输入框 */
-.light .input-glass {
-  background: rgba(255, 255, 255, 0.7);
-  border-color: rgba(0, 0, 0, 0.06);
-  color: #374151;
-}
-.light .input-glass:focus {
-  border-color: rgba(59, 130, 246, 0.25);
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.05);
-}
-
 /* 文章内容 */
 .light .article-content { color: #374151; }
 .light .article-content h1,
@@ -973,13 +919,6 @@ body {
   overflow: hidden;
 }
 
-.line-clamp-3 {
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
 /* 聚焦环形 */
 .focus-ring {
   outline: none;
@@ -993,25 +932,4 @@ body {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-}
-
-/* 悬浮光晕 */
-.glow-hover {
-  position: relative;
-  overflow: hidden;
-}
-
-.glow-hover::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.03), transparent);
-  transition: left 0.5s ease;
-}
-
-.glow-hover:hover::before {
-  left: 100%;
 }

@@ -12,7 +12,6 @@ const projects = [
     tags: ["Vue3", "Vite", "Tailwind CSS"],
     url: "https://dreamxj.github.io/my_blog_vue/#/",
     status: "已完成",
-    gradient: "from-[#3B82F6] to-[#8B5CF6]",
   },
   {
     name: "AI Toolkit",
@@ -20,7 +19,6 @@ const projects = [
     tags: ["Python", "Transformers", "ONNX"],
     url: "#",
     status: "开发中",
-    gradient: "from-[#06B6D4] to-[#3B82F6]",
   },
   {
     name: "Design System",
@@ -28,7 +26,6 @@ const projects = [
     tags: ["React", "Storybook", "CSS"],
     url: "#",
     status: "进行中",
-    gradient: "from-[#8B5CF6] to-[#06B6D4]",
   },
   {
     name: "Dev CLI",
@@ -36,7 +33,6 @@ const projects = [
     tags: ["Node.js", "CLI", "TypeScript"],
     url: "#",
     status: "规划中",
-    gradient: "from-[#3B82F6] to-[#06B6D4]",
   },
 ];
 </script>

@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, onMounted, nextTick } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useBlogStore } from '@/store/blog'
 import ArticleCard from '@/components/ArticleCard.vue'
 import LogoIcon from '@/components/LogoIcon.vue'
@@ -20,10 +20,6 @@ const allTags = computed(() => {
     .sort((a, b) => b.count - a.count)
 })
 
-const featuredArticles = computed(() => {
-  return store.articles.slice(0, 6)
-})
-
 const filteredArticles = computed(() => {
   let list = store.articles
   if (selectedTag.value) {
@@ -40,28 +36,25 @@ const filteredArticles = computed(() => {
   return list
 })
 
-// 精选项目占位数据
+// 精选项目
 const featuredProjects = [
   {
     name: 'MyBlog',
     desc: '下一代个人博客系统 — Vue3 + Vite + Tailwind CSS',
     tags: ['Vue3', 'Vite', 'Tailwind CSS'],
-    url: 'https://github.com/yourusername/myblog2',
-    gradient: 'from-[#3B82F6] to-[#8B5CF6]'
+    url: 'https://dreamxj.github.io/my_blog_vue/'
   },
   {
     name: 'AI Toolkit',
     desc: 'AI 开发工具集 — 自然语言处理与模型部署',
     tags: ['Python', 'AI', 'NLP'],
-    url: '#',
-    gradient: 'from-[#06B6D4] to-[#3B82F6]'
+    url: '#'
   },
   {
     name: 'Design System',
     desc: '企业级组件库与设计规范 — 高效构建产品界面',
     tags: ['React', 'Storybook', 'CSS'],
-    url: '#',
-    gradient: 'from-[#8B5CF6] to-[#06B6D4]'
+    url: '#'
   }
 ]
 

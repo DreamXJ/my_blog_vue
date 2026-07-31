@@ -55,7 +55,6 @@ blog/
 │   │   └── About.vue         # 关于页面
 │   ├── router/index.js       # Vue Router（hash 模式）
 │   ├── store/blog.js         # Pinia 状态管理
-│   ├── utils/mdParser.js     # Markdown 解析工具
 │   ├── App.vue               # 根组件
 │   ├── main.js               # 入口文件
 │   └── style.css             # 全局样式 + 5 套主题变量

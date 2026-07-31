@@ -7,10 +7,6 @@ const scrolled = ref(false)
 function handleScroll() { scrolled.value = window.scrollY > 20 }
 onMounted(() => window.addEventListener('scroll', handleScroll, { passive: true }))
 onUnmounted(() => window.removeEventListener('scroll', handleScroll))
-
-import { useRouter } from 'vue-router'
-const router = useRouter()
-router.afterEach(() => window.scrollTo({ top: 0, behavior: 'smooth' }))
 </script>
 
 <template>

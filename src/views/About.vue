@@ -1,4 +1,5 @@
 <script setup>
+import LogoIcon from "@/components/LogoIcon.vue";
 </script>
 
 <template>
@@ -17,9 +18,9 @@
     <div class="glass-card rounded-g2xl p-6 sm:p-8 mb-6">
       <div class="flex flex-col sm:flex-row items-start gap-6">
         <div
-          class="w-20 h-20 rounded-2xl bg-gradient-primary flex items-center justify-center text-white text-2xl font-bold shadow-glow shrink-0"
+          class="w-20 h-20 rounded-2xl bg-gradient-primary flex items-center justify-center shadow-glow shrink-0"
         >
-          D
+          <LogoIcon :size="44" />
         </div>
         <div class="flex-1 min-w-0">
           <h2 class="text-xl font-semibold text-white mb-1">DreamXj</h2>

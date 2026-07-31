@@ -4,7 +4,7 @@ import { useRouter, useRoute } from 'vue-router'
 import { useBlogStore } from '@/store/blog'
 import LogoIcon from '@/components/LogoIcon.vue'
 
-const props = defineProps({
+defineProps({
   scrolled: Boolean
 })
 
@@ -14,7 +14,6 @@ const mobileOpen = ref(false)
 const searchOpen = ref(false)
 const searchQuery = ref('')
 const searchResults = ref([])
-const searchFocused = ref(false)
 const themeMenuOpen = ref(false)
 
 // 亮暗切换
@@ -43,6 +42,12 @@ onMounted(() => {
   if (saved === 'light') {
     document.documentElement.classList.add('light')
   }
+
+  window.addEventListener('keydown', handleKeydown)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('keydown', handleKeydown)
 })
 
 function toggleTheme() {
@@ -124,14 +129,6 @@ function handleKeydown(e) {
   }
 }
 
-onMounted(() => {
-  window.addEventListener('keydown', handleKeydown)
-})
-
-onUnmounted(() => {
-  window.removeEventListener('keydown', handleKeydown)
-})
-
 const navLinks = [
   { path: '/', label: '首页' },
   { path: '/archive', label: '归档' },
@@ -143,16 +140,6 @@ function isActive(path) {
   if (path === '/') return route.path === '/'
   return route.path.startsWith(path)
 }
-
-// 搜索框点击外部关闭
-const searchRef = ref(null)
-onMounted(() => {
-  document.addEventListener('click', (e) => {
-    if (searchRef.value && !searchRef.value.contains(e.target)) {
-      searchFocused.value = false
-    }
-  })
-})
 </script>
 
 <template>
@@ -240,7 +227,6 @@ onMounted(() => {
                   {{ isDark ? '☀' : '☾' }}
                 </span>
                 <span class="flex-1">{{ isDark ? '亮色模式' : '暗色模式' }}</span>
-                <span class="text-[0.55rem] text-[#6B7280]">{{ isDark ? '切换' : '切换' }}</span>
               </button>
             </div>
         </div>

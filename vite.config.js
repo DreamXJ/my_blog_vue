@@ -5,17 +5,23 @@ import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
 import { marked } from 'marked'
+import { markedHighlight } from 'marked-highlight'
 import hljs from 'highlight.js'
 
-marked.setOptions({
-  breaks: true,
-  gfm: true,
-  highlight: function (code, lang) {
+// marked v12+ 已移除 highlight 选项，使用 marked-highlight 插件实现语法高亮
+marked.use(markedHighlight({
+  langPrefix: 'hljs language-',
+  highlight(code, lang) {
     if (lang && hljs.getLanguage(lang)) {
       try { return hljs.highlight(code, { language: lang }).value } catch (_) { }
     }
     return hljs.highlightAuto(code).value
   }
+}))
+
+marked.setOptions({
+  breaks: true,
+  gfm: true
 })
 
 function blogPlugin() {
@@ -24,7 +30,6 @@ function blogPlugin() {
   const dataFile = path.join(publicDir, 'blog-data.json')
   const searchFile = path.join(publicDir, 'search-index.json')
   const sitemapFile = path.join(publicDir, 'sitemap.xml')
-  const rssFile = path.join(publicDir, 'rss.xml')
 
   function walkMdFiles(dir) {
     const entries = fs.readdirSync(dir, { withFileTypes: true })
@@ -81,7 +86,7 @@ function blogPlugin() {
       fs.writeFileSync(dataFile, JSON.stringify(blogData, null, 2), 'utf-8')
       fs.writeFileSync(searchFile, JSON.stringify(searchIndex, null, 2), 'utf-8')
 
-      const siteUrl = 'https://yourusername.github.io/myblog2'
+      const siteUrl = 'https://dreamxj.github.io/my_blog_vue'
       let sitemap = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
       sitemap += `  <url><loc>${siteUrl}/</loc><priority>1.0</priority></url>\n`
       sitemap += `  <url><loc>${siteUrl}/archive</loc><priority>0.8</priority></url>\n`
