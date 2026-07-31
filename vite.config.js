@@ -111,7 +111,19 @@ function blogPlugin() {
 }
 
 export default defineConfig({
+  // ===================== base 路径配置（部署 GitHub Pages 必配） =====================
+  // base 决定打包后资源（js/css/img）的引用路径，配错会导致页面白屏或静态资源 404。
+  //
+  // 【场景1：普通项目仓库】页面地址形如 https://<用户名>.github.io/<仓库名>/
+  //   资源必须带上仓库名前缀，base 设置为 '/<仓库名>/'（注意首尾斜杠）
+  //   示例：仓库名为 my_blog_vue，则 base: '/my_blog_vue/'
   base: '/my_blog_vue/',
+  //
+  // 【场景2：个人主页仓库】页面地址形如 https://<用户名>.github.io/
+  //   （仓库名必须与用户名相同：<用户名>.github.io，且仅能有这一个同名仓库）
+  //   资源位于根路径，base 设置为 '/' 即可
+  // base: '/',
+  // ==================================================================================
   plugins: [vue(), blogPlugin()],
   resolve: { alias: { '@': fileURLToPath(new URL('./src', import.meta.url)) } },
   build: { outDir: 'dist', assetsDir: 'assets' }

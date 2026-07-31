@@ -1,0 +1,81 @@
+# =====================================================================
+# GitHub Actions：Vue3 + Vite 自动构建并部署到 GitHub Pages
+#
+# 工作流约定（严格遵守）：
+#   1. 开发分支为 develop，所有业务代码只在 develop 分支维护；
+#   2. 推送代码到 develop 自动触发构建，也可在 Actions 页面手动触发；
+#   3. 构建产物 dist/ 自动推送到 main 分支（main 只存放静态资源，不存放源码，
+#      禁止手动向 main 提交代码）；
+#   4. 部署方式：peaceiris/actions-gh-pages 推送产物到 main 分支，
+#      GitHub Pages 设置 "Deploy from a branch" -> main / (root)。
+# =====================================================================
+
+name: Deploy to GitHub Pages
+
+# ----------------------------- 触发条件 -----------------------------
+on:
+  # ① 推送 develop 分支时自动触发（业务代码只在 develop 上维护）
+  push:
+    branches:
+      - develop
+  # ② 支持手动触发：仓库 Actions 页面 -> 左侧选中本工作流 -> Run workflow
+  workflow_dispatch:
+
+# ----------------------------- 权限配置 -----------------------------
+# 关键：GITHUB_TOKEN 默认只有只读权限，这里必须显式声明 contents: write，
+# 否则 peaceiris/actions-gh-pages 推送产物到 main 分支时会报 "Permission denied"
+permissions:
+  contents: write
+
+# 并发控制：同一时间只保留一个部署任务，新提交会取消正在运行/排队中的旧任务，
+# 避免多次推送 main 产生竞争
+concurrency:
+  group: pages-deploy
+  cancel-in-progress: true
+
+jobs:
+  build-and-deploy:
+    name: Build & Deploy to main
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. 拉取代码（默认检出触发本工作流的分支，即 develop）
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 2. 安装 Node 24（Node 24 为当前 LTS，与 package.json engines 无冲突时直接可用）
+      - name: Setup Node.js 24
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          # 使用 package-lock.json 做依赖缓存，加速后续构建
+          cache: npm
+
+      # 3. 安装依赖：npm ci 按 package-lock.json 精确安装
+      #    注意：package-lock.json 必须已提交到 develop 分支，否则 npm ci 直接失败
+      - name: Install dependencies
+        run: npm ci
+
+      # 4. 打包：Vite 构建，产物输出到 ./dist
+      #    若你的仓库 package.json 里 build 脚本不是 "vite build"，请以实际脚本为准
+      - name: Build with Vite
+        run: npm run build
+
+      # 5. 生成 .nojekyll：告诉 GitHub Pages 不要用 Jekyll 处理该目录，
+      #    避免以下划线开头等资源（如 _assets、_data）被 Jekyll 过滤导致 404
+      - name: Create .nojekyll
+        run: touch dist/.nojekyll
+
+      # 6. 推送 dist/ 到 main 分支（peaceiris/actions-gh-pages 官方推荐方案）
+      #    - publish_dir   ：要发布的产物目录
+      #    - publish_branch：推送到的分支（main，仅存放静态资源）
+      #    - github_token  ：使用内置 GITHUB_TOKEN（权限见上方 permissions）
+      #    - force_orphan  ：每次部署都生成全新提交，保证 main 只含最新产物；
+      #                      如需保留 main 的提交历史，可删除该行（默认 false）
+      - name: Deploy dist to main branch
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+          publish_branch: main
+          force_orphan: true

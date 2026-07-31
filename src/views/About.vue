@@ -1,5 +1,5 @@
 <script setup>
-import LogoIcon from "@/components/LogoIcon.vue";
+import LivelyAvatar from "@/components/LivelyAvatar.vue";
 </script>
 
 <template>
@@ -17,11 +17,7 @@ import LogoIcon from "@/components/LogoIcon.vue";
     <!-- ── 个人资料卡 ── -->
     <div class="glass-card rounded-g2xl p-6 sm:p-8 mb-6">
       <div class="flex flex-col sm:flex-row items-start gap-6">
-        <div
-          class="w-20 h-20 rounded-2xl bg-gradient-primary flex items-center justify-center shadow-glow shrink-0"
-        >
-          <LogoIcon :size="44" />
-        </div>
+        <LivelyAvatar :size="80" />
         <div class="flex-1 min-w-0">
           <h2 class="text-xl font-semibold text-white mb-1">DreamXj</h2>
           <div class="text-sm text-[#60A5FA] font-medium mb-3">
