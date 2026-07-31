@@ -1,5 +1,328 @@
 [
   {
+    "slug": "ai-agent-architecture",
+    "title": "AI Agent 智能体架构：从 ReAct 到多智能体协作",
+    "desc": "拆解 AI Agent 的核心循环、工具调用、记忆系统，对比主流框架并给出 7 个实战踩坑点。",
+    "tags": [
+      "AI",
+      "Agent",
+      "架构",
+      "实战"
+    ],
+    "date": "2026-07-31"
+  },
+  {
+    "slug": "api-design-idempotency",
+    "title": "后端 API 设计规范与幂等性：7 个实战踩坑点",
+    "desc": "从 RESTful 设计、状态码、错误处理到幂等性设计，总结后端接口设计的完整规范。",
+    "tags": [
+      "API 设计",
+      "RESTful",
+      "幂等性",
+      "后端"
+    ],
+    "date": "2026-07-31"
+  },
+  {
+    "slug": "browser-cache-deep-dive",
+    "title": "浏览器缓存机制详解：强缓存、协商缓存与 6 个踩坑点",
+    "desc": "彻底搞懂 Cache-Control、ETag、Last-Modified 的配合关系，以及缓存失效、更新不及时等实战问题。",
+    "tags": [
+      "浏览器缓存",
+      "HTTP",
+      "性能",
+      "踩坑"
+    ],
+    "date": "2026-07-31"
+  },
+  {
+    "slug": "css-layout-pitfalls",
+    "title": "CSS 布局踩坑指南：Flex 与 Grid 的 10 个常见陷阱",
+    "desc": "整理 Flexbox 与 Grid 布局中高频踩坑点，每个坑都附正确写法与原理分析。",
+    "tags": [
+      "CSS",
+      "Flexbox",
+      "Grid",
+      "踩坑"
+    ],
+    "date": "2026-07-31"
+  },
+  {
+    "slug": "database-connection-pool",
+    "title": "数据库连接池原理与配置：HikariCP、Druid 与 6 个踩坑点",
+    "desc": "讲透连接池工作原理、核心参数、泄漏检测，对比主流连接池并给出配置建议。",
+    "tags": [
+      "数据库",
+      "连接池",
+      "性能",
+      "后端"
+    ],
+    "date": "2026-07-31"
+  },
+  {
+    "slug": "database-transaction-concurrency",
+    "title": "数据库事务与并发控制：隔离级别、锁与 6 个实战坑",
+    "desc": "从 ACID 与隔离级别讲起，覆盖悲观锁、乐观锁、死锁与常见事务踩坑场景。",
+    "tags": [
+      "数据库",
+      "事务",
+      "并发控制",
+      "MySQL"
+    ],
+    "date": "2026-07-31"
+  },
+  {
+    "slug": "event-loop-deep-dive",
+    "title": "JavaScript 事件循环：宏任务、微任务与 5 个必考踩坑点",
+    "desc": "用执行顺序实例吃透事件循环机制，覆盖 setTimeout、Promise、async/await、requestAnimationFrame 的经典陷阱。",
+    "tags": [
+      "JavaScript",
+      "事件循环",
+      "异步",
+      "踩坑"
+    ],
+    "date": "2026-07-31"
+  },
+  {
+    "slug": "frontend-engineering-pipeline",
+    "title": "前端工程化落地：ESLint、Prettier、Husky 与 6 个配置坑",
+    "desc": "从前端规范体系到 CI 集成，讲透 lint-staged、commitlint、统一配置的最佳实践。",
+    "tags": [
+      "工程化",
+      "ESLint",
+      "Prettier",
+      "Husky"
+    ],
+    "date": "2026-07-31"
+  },
+  {
+    "slug": "frontend-performance-optimization",
+    "title": "前端性能优化实战：从指标到落地的 9 个优化点",
+    "desc": "围绕 LCP、CLS、INP 等 Core Web Vitals，给出可落地的加载、渲染、运行时优化方案。",
+    "tags": [
+      "性能优化",
+      "Web Vitals",
+      "加载优化",
+      "实战"
+    ],
+    "date": "2026-07-31"
+  },
+  {
+    "slug": "frontend-security-pitfalls",
+    "title": "前端安全实战：XSS、CSRF 与 7 个防护踩坑点",
+    "desc": "从攻击原理到防御落地，覆盖 XSS 注入、CSRF 伪造请求、CSP 策略等前端安全核心议题。",
+    "tags": [
+      "安全",
+      "XSS",
+      "CSRF",
+      "实战"
+    ],
+    "date": "2026-07-31"
+  },
+  {
+    "slug": "jwt-auth-security",
+    "title": "JWT 认证原理与安全实践：从签发到验证的完整指南",
+    "desc": "深入 JWT 结构、签名算法、无状态会话的优缺点，覆盖 token 刷新、密钥管理、常见安全漏洞。",
+    "tags": [
+      "JWT",
+      "认证",
+      "安全",
+      "后端"
+    ],
+    "date": "2026-07-31"
+  },
+  {
+    "slug": "llm-transformer-basics",
+    "title": "大语言模型原理精讲：从 Transformer 到 GPT 的完整旅程",
+    "desc": "拆解 Transformer 架构、注意力机制、预训练与微调流程，讲透 LLM 为什么\"会说话\"。",
+    "tags": [
+      "AI",
+      "LLM",
+      "Transformer",
+      "原理"
+    ],
+    "date": "2026-07-31"
+  },
+  {
+    "slug": "message-queue-practice",
+    "title": "消息队列选型与实践：RabbitMQ、Kafka 与 6 个踩坑点",
+    "desc": "对比主流 MQ 的定位差异，覆盖消息丢失、重复消费、顺序性、堆积等高频问题。",
+    "tags": [
+      "消息队列",
+      "RabbitMQ",
+      "Kafka",
+      "架构"
+    ],
+    "date": "2026-07-31"
+  },
+  {
+    "slug": "microservices-practice",
+    "title": "微服务架构实践：服务拆分、注册发现与 7 个踩坑点",
+    "desc": "从单体到微服务的演进路线讲起，覆盖服务拆分、注册中心、网关、分布式链路中的常见坑。",
+    "tags": [
+      "微服务",
+      "架构",
+      "分布式",
+      "后端"
+    ],
+    "date": "2026-07-31"
+  },
+  {
+    "slug": "mobile-adaptation-pitfalls",
+    "title": "移动端适配与兼容性：视口、rem、安全区与 8 个坑",
+    "desc": "覆盖 viewport 设置、rem/vw 适配方案、iPhone 安全区、1px 边框等移动端高频问题。",
+    "tags": [
+      "移动端",
+      "适配",
+      "兼容性",
+      "踩坑"
+    ],
+    "date": "2026-07-31"
+  },
+  {
+    "slug": "mysql-index-optimization",
+    "title": "MySQL 索引优化实战：从慢查询到索引设计的完整指南",
+    "desc": "覆盖 explain 解读、最左前缀、索引失效场景、覆盖索引与分页优化，附 7 个实战踩坑点。",
+    "tags": [
+      "MySQL",
+      "索引",
+      "性能优化",
+      "数据库"
+    ],
+    "date": "2026-07-31"
+  },
+  {
+    "slug": "nodejs-backend-pitfalls",
+    "title": "Node.js 后端开发踩坑：异步、内存与进程管理的 8 个教训",
+    "desc": "从事件循环阻塞、内存泄漏、异常处理到 pm2 进程管理，总结 Node.js 服务端实战经验。",
+    "tags": [
+      "Node.js",
+      "后端",
+      "踩坑",
+      "服务端"
+    ],
+    "date": "2026-07-31"
+  },
+  {
+    "slug": "prompt-engineering-practice",
+    "title": "提示词工程实战：系统提示、Few-shot 与 8 个踩坑点",
+    "desc": "从角色设定、结构化输出到思维链，系统讲解 Prompt 设计的可复用方法论与高频陷阱。",
+    "tags": [
+      "AI",
+      "Prompt",
+      "LLM",
+      "实战"
+    ],
+    "date": "2026-07-31"
+  },
+  {
+    "slug": "python-advanced-features",
+    "title": "Python 进阶特性精讲：装饰器、生成器与上下文管理器",
+    "desc": "从原理到实战，深入理解 Python 三大高级特性，附 8 个高频踩坑点。",
+    "tags": [
+      "Python",
+      "装饰器",
+      "生成器",
+      "进阶"
+    ],
+    "date": "2026-07-31"
+  },
+  {
+    "slug": "python-asyncio-practice",
+    "title": "Python asyncio 异步编程实战：从原理到 9 个踩坑点",
+    "desc": "讲透事件循环、协程、await 机制，覆盖并发爬虫、超时控制、任务取消等实战场景。",
+    "tags": [
+      "Python",
+      "asyncio",
+      "异步",
+      "实战"
+    ],
+    "date": "2026-07-31"
+  },
+  {
+    "slug": "rag-practice-guide",
+    "title": "RAG 检索增强生成实战：从架构到优化的完整指南",
+    "desc": "讲透 RAG 的架构、Embedding、召回与重排，覆盖 7 个生产级踩坑点与效果优化路径。",
+    "tags": [
+      "AI",
+      "RAG",
+      "Embedding",
+      "实战"
+    ],
+    "date": "2026-07-31"
+  },
+  {
+    "slug": "rate-limiting-circuit-breaker",
+    "title": "高并发限流与熔断：计数器、令牌桶、滑动窗口实战",
+    "desc": "对比固定窗口、滑动窗口、令牌桶、漏桶四种限流算法，并讲解分布式限流与熔断降级方案。",
+    "tags": [
+      "限流",
+      "熔断",
+      "高并发",
+      "架构"
+    ],
+    "date": "2026-07-31"
+  },
+  {
+    "slug": "redis-cache-pitfalls",
+    "title": "Redis 缓存实战：穿透、击穿、雪崩与 7 个踩坑点",
+    "desc": "从缓存三大经典问题的原理与解法讲起，覆盖过期策略、序列化、分布式锁等实战细节。",
+    "tags": [
+      "Redis",
+      "缓存",
+      "高并发",
+      "踩坑"
+    ],
+    "date": "2026-07-31"
+  },
+  {
+    "slug": "typescript-advanced-pitfalls",
+    "title": "TypeScript 进阶踩坑：类型体操与 8 个实战陷阱",
+    "desc": "覆盖 typeof/infer/泛型约束等类型技巧，以及配置、编译、泛型使用中的高频坑。",
+    "tags": [
+      "TypeScript",
+      "类型系统",
+      "踩坑"
+    ],
+    "date": "2026-07-31"
+  },
+  {
+    "slug": "vector-database-embedding",
+    "title": "向量数据库与 Embedding 实战：从原理到选型",
+    "desc": "讲透 Embedding 原理、向量检索算法、主流向量库对比，以及 8 个工程踩坑点。",
+    "tags": [
+      "AI",
+      "向量数据库",
+      "Embedding",
+      "实战"
+    ],
+    "date": "2026-07-31"
+  },
+  {
+    "slug": "vue3-component-communication",
+    "title": "Vue 3 组件通信全方案对比：props、emit、provide/inject、Pinia",
+    "desc": "系统对比 Vue 3 各种组件通信方式的适用场景、写法与选型建议，附 6 个踩坑点。",
+    "tags": [
+      "Vue3",
+      "组件通信",
+      "Pinia",
+      "踩坑"
+    ],
+    "date": "2026-07-31"
+  },
+  {
+    "slug": "vue3-reactivity-pitfalls",
+    "title": "Vue 3 响应式原理与 8 个高频踩坑点",
+    "desc": "从 Proxy 原理出发，梳理 ref、reactive、computed、watch 的使用陷阱与深层响应式问题。",
+    "tags": [
+      "Vue3",
+      "响应式",
+      "踩坑",
+      "原理"
+    ],
+    "date": "2026-07-31"
+  },
+  {
     "slug": "Vue静态博客搭建实战",
     "title": "Vue静态博客搭建实战",
     "desc": "基于 md 文件驱动静态博客开发与完整部署流程记录，涵盖 Vue3、Vite、Tailwind CSS 等技术栈。",

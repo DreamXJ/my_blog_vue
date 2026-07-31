@@ -30,6 +30,11 @@ import LogoIcon from "@/components/LogoIcon.vue";
             >首页</router-link
           >
           <router-link
+            to="/articles"
+            class="hover:text-[#9CA3AF] transition-colors"
+            >文章</router-link
+          >
+          <router-link
             to="/archive"
             class="hover:text-[#9CA3AF] transition-colors"
             >归档</router-link

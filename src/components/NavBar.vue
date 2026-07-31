@@ -131,6 +131,7 @@ function handleKeydown(e) {
 
 const navLinks = [
   { path: '/', label: '首页' },
+  { path: '/articles', label: '文章' },
   { path: '/archive', label: '归档' },
   { path: '/projects', label: '项目' },
   { path: '/about', label: '关于' },

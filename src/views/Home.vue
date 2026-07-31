@@ -5,8 +5,7 @@ import ArticleCard from '@/components/ArticleCard.vue'
 import LogoIcon from '@/components/LogoIcon.vue'
 
 const store = useBlogStore()
-const searchQuery = ref('')
-const selectedTag = ref('')
+const MAX_LATEST = 9
 
 onMounted(() => {
   if (store.articles.length === 0) {
@@ -14,27 +13,9 @@ onMounted(() => {
   }
 })
 
-const allTags = computed(() => {
-  return Object.entries(store.tags)
-    .map(([name, slugs]) => ({ name, count: slugs.length }))
-    .sort((a, b) => b.count - a.count)
-})
-
-const filteredArticles = computed(() => {
-  let list = store.articles
-  if (selectedTag.value) {
-    list = store.getArticlesByTag(selectedTag.value)
-  }
-  if (searchQuery.value.trim()) {
-    const q = searchQuery.value.trim().toLowerCase()
-    list = list.filter(a =>
-      a.title.toLowerCase().includes(q) ||
-      a.desc.toLowerCase().includes(q) ||
-      (a.tags || []).some(t => t.toLowerCase().includes(q))
-    )
-  }
-  return list
-})
+// 首页最新文章：最多展示 9 篇
+const latestArticles = computed(() => store.articles.slice(0, MAX_LATEST))
+const hasMoreArticles = computed(() => store.articles.length > MAX_LATEST)
 
 // 精选项目
 const featuredProjects = [
@@ -68,7 +49,7 @@ function openUrl(url) {
 <template>
   <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 pb-16 relative">
     <!-- ── Hero 内容区 ── -->
-    <section class="relative pt-20 sm:pt-24">
+    <section class="relative pt-20 sm:pt-24 pb-14 sm:pb-16">
 
       <div class="relative flex flex-col lg:flex-row items-center gap-10 lg:gap-16">
         <!-- 左侧文字 -->
@@ -94,7 +75,7 @@ function openUrl(url) {
 
           <!-- CTA -->
           <div class="flex flex-wrap items-center gap-3 justify-center lg:justify-start">
-            <router-link to="/archive" class="btn-primary">
+            <router-link to="/articles" class="btn-primary">
               浏览文章
               <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             </router-link>
@@ -104,20 +85,35 @@ function openUrl(url) {
           </div>
 
           <!-- 数据统计 -->
-          <div class="flex items-center gap-6 sm:gap-8 mt-8 pt-6 border-t border-[rgba(255,255,255,0.04)] justify-center lg:justify-start">
-            <div class="text-center">
-              <div class="text-lg font-semibold text-white">{{ store.articles.length }}</div>
-              <div class="text-xs text-[#6B7280] mt-0.5">文章</div>
+          <div class="inline-flex items-center gap-7 sm:gap-9 mt-10 px-6 sm:px-8 py-4 rounded-2xl glass border border-[rgba(59,130,246,0.08)] justify-center lg:justify-start shadow-glow-sm">
+            <div class="flex items-center gap-3">
+              <div class="w-9 h-9 rounded-xl bg-[rgba(59,130,246,0.1)] flex items-center justify-center shrink-0">
+                <svg class="w-4 h-4 text-[#60A5FA]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+              </div>
+              <div class="text-left">
+                <div class="text-xl font-bold text-gradient leading-none">{{ store.articles.length }}</div>
+                <div class="text-[0.7rem] text-[#6B7280] mt-1">文章</div>
+              </div>
             </div>
-            <div class="w-px h-8 bg-[rgba(255,255,255,0.04)]"></div>
-            <div class="text-center">
-              <div class="text-lg font-semibold text-white">{{ Object.keys(store.tags).length }}</div>
-              <div class="text-xs text-[#6B7280] mt-0.5">标签</div>
+            <div class="w-px h-9 bg-[rgba(255,255,255,0.06)]"></div>
+            <div class="flex items-center gap-3">
+              <div class="w-9 h-9 rounded-xl bg-[rgba(139,92,246,0.1)] flex items-center justify-center shrink-0">
+                <svg class="w-4 h-4 text-[#A78BFA]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+              </div>
+              <div class="text-left">
+                <div class="text-xl font-bold text-gradient leading-none">{{ Object.keys(store.tags).length }}</div>
+                <div class="text-[0.7rem] text-[#6B7280] mt-1">标签</div>
+              </div>
             </div>
-            <div class="w-px h-8 bg-[rgba(255,255,255,0.04)]"></div>
-            <div class="text-center">
-              <div class="text-lg font-semibold text-white">{{ store.archives.length }}</div>
-              <div class="text-xs text-[#6B7280] mt-0.5">归档</div>
+            <div class="w-px h-9 bg-[rgba(255,255,255,0.06)]"></div>
+            <div class="flex items-center gap-3">
+              <div class="w-9 h-9 rounded-xl bg-[rgba(6,182,212,0.1)] flex items-center justify-center shrink-0">
+                <svg class="w-4 h-4 text-[#22D3EE]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              </div>
+              <div class="text-left">
+                <div class="text-xl font-bold text-gradient leading-none">{{ store.archives.length }}</div>
+                <div class="text-[0.7rem] text-[#6B7280] mt-1">归档</div>
+              </div>
             </div>
           </div>
         </div>
@@ -176,42 +172,15 @@ function openUrl(url) {
     </div>
 
     <template v-else>
-      <!-- ── 标签筛选 ── -->
-      <div v-if="allTags.length > 0" class="mb-8">
-        <div class="flex flex-wrap gap-2">
-          <button
-            @click="selectedTag = ''"
-            :class="['tag !rounded-lg !px-3 !py-1.5 !text-xs transition-all',
-              !selectedTag ? 'tag-active' : ''
-            ]"
-          >
-            全部
-          </button>
-          <button
-            v-for="tag in allTags"
-            :key="tag.name"
-            @click="selectedTag = tag.name"
-            :class="['tag !rounded-lg !px-3 !py-1.5 !text-xs transition-all',
-              selectedTag === tag.name ? 'tag-active' : ''
-            ]"
-          >
-            {{ tag.name }}
-            <span class="ml-1 opacity-60">({{ tag.count }})</span>
-          </button>
-        </div>
-      </div>
-
-      <!-- ── 文章列表 ── -->
-      <div v-if="filteredArticles.length > 0">
+      <!-- ── 最新文章列表 ── -->
+      <div v-if="latestArticles.length > 0">
         <div class="flex items-center justify-between mb-6">
-          <h2 class="text-lg font-semibold text-white">
-            {{ selectedTag ? `#${selectedTag}` : '最新文章' }}
-          </h2>
-          <span class="text-xs text-[#6B7280]">{{ filteredArticles.length }} 篇</span>
+          <h2 class="text-lg font-semibold text-white">最新文章</h2>
+          <span class="text-xs text-[#6B7280]">最新 {{ latestArticles.length }} 篇</span>
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
           <ArticleCard
-            v-for="article in filteredArticles"
+            v-for="article in latestArticles"
             :key="article.slug"
             :article="article"
           />
@@ -228,9 +197,9 @@ function openUrl(url) {
       </div>
 
       <!-- ── 查看更多 ── -->
-      <div v-if="store.articles.length > 6 && !selectedTag && !searchQuery" class="text-center mt-10">
+      <div v-if="hasMoreArticles" class="text-center mt-10">
         <router-link to="/archive" class="btn-secondary !inline-flex">
-          查看全部文章
+          查看全部文章（共 {{ store.articles.length }} 篇）
           <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </router-link>
       </div>
